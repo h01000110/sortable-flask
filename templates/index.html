@@ -1,0 +1,31 @@
+<html>
+  <head>
+    <title>Flask example</title>
+    <script src="{{ url_for('static', filename='js/jquery-1.12.4.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/jquery-ui.js') }}"></script>
+    <script>
+        $(function(){
+            $('#sortMe').sortable({
+                update: function(event, ui) {
+                    var postData = $(this).sortable('serialize');
+
+                    $.ajax({
+                        type: 'POST',
+                        contentType: 'application/json',
+                        data: JSON.stringify(postData),
+                        dataType: 'json',
+                        url: '/post'
+                    });
+                }
+            });
+        });
+    </script>
+  </head>
+  <body>
+    <ul id="sortMe">
+    {% for i in ordem %}
+        <li id="item_{{ i }}">item {{ i }}</li>
+    {% endfor %}
+    </ul>
+  </body>
+</html>
