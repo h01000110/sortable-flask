@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, jsonify
+from flask import Flask, render_template, request
 from flask_sqlalchemy import SQLAlchemy
 
 
@@ -19,6 +19,11 @@ class Sortable(db.Model):
 
 
 db.create_all()
+
+a = '12345'
+b = Sortable(a)
+db.session.add(b)
+db.session.commit()
 
 
 @app.route('/')
